@@ -9,8 +9,8 @@ if (!empty($inet_wk_options['inet-webkit-contact-active'])) {
 
     function my_front_contact_scripts()
     {
-        wp_enqueue_style('mb-wp-contact-style', INET_WK_URL . 'assets/css/frontend/inet-webkit-contact-style.css');
-        wp_enqueue_script('mb-wp-contact-script', INET_WK_URL . 'assets/js/frontend/inet-webkit-ct-scripts.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_style('inet-wk-contact-style', INET_WK_URL . 'assets/css/frontend/inet-webkit-contact-style.css');
+        wp_enqueue_script('inet-wk-contact-script', INET_WK_URL . 'assets/js/frontend/inet-webkit-ct-scripts.js', array('jquery'), '1.0.0', true);
     }
 
     add_action('wp_enqueue_scripts', 'my_front_contact_scripts');
@@ -26,7 +26,7 @@ if (!empty($inet_wk_options['inet-webkit-contact-active'])) {
         $inet_wk_general_ct_title = (!empty($inet_wk_options['inet-webkit-opt-contact']['general-contact']['contact-title'])) ? $inet_wk_options['inet-webkit-opt-contact']['general-contact']['contact-title'] : $default_greeting;;
 
         $inet_wk_contact_repeater = !empty($inet_wk_options['inet-webkit-opt-contact']['contact-phone']['contact-repeater']) ? $inet_wk_options['inet-webkit-opt-contact']['contact-phone']['contact-repeater'] : '';
-        $position_y = !empty($inet_wk_options['inet-webkit-opt-contact']['contact-design']['position-y']) ? $inet_wk_options['inet-webkit-opt-contact']['contact-design']['position-y'] : 60;
+        $position_y = !empty($inet_wk_options['inet-webkit-opt-contact']['contact-design']['position-y']) ? $inet_wk_options['inet-webkit-opt-contact']['contact-design']['position-y'] : 50;
 
         $facebook_chat = isset($inet_wk_options['inet-webkit-opt-contact']['general-contact']['fanpage-id']) ? $inet_wk_options['inet-webkit-opt-contact']['general-contact']['fanpage-id'] : '';
         $tawk_chat = isset($inet_wk_options['inet-webkit-opt-contact']['general-contact']['tawk-to']) ? $inet_wk_options['inet-webkit-opt-contact']['general-contact']['tawk-to'] : '';
@@ -42,6 +42,8 @@ if (!empty($inet_wk_options['inet-webkit-contact-active'])) {
 
         if (!empty($facebook) || !empty($zalo) || !empty($email) || !empty($facebook_chat) || !empty($tawk_chat)) :
             ?>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+
             <div id="inet-webkit-contact" class="inet-webkit-main-contact <?php echo esc_attr($position); ?>"
                  style="top: <?php echo esc_attr($position_y) . '%'; ?>">
                 <div class="inet-webkit-contact-container <?php echo esc_attr($position); ?>">
@@ -196,7 +198,7 @@ if (!empty($inet_wk_options['inet-webkit-contact-active'])) {
                         </svg>
                     </div>
                 </div>
-                <div class="contact-greeting <?php echo esc_attr($position); ?>">
+                <div class="contact-greeting isHideGreeting <?php echo esc_attr($position); ?>">
                     <div class="contact-greeting-content"><?php echo esc_html($default_greeting); ?></div>
                     <div class="inet-webkit-contact-close-greeting"
                          style="background-color:<?php echo esc_attr($color); ?>">
@@ -217,7 +219,7 @@ if (!empty($inet_wk_options['inet-webkit-contact-active'])) {
         <?php endif; ?>
 
         <?php if (!empty($inet_wk_contact_repeater) && count($inet_wk_contact_repeater) > 0): ?>
-        <div style="top: <?php echo ($position_y + 10) . '%'; ?>;"
+        <div style="top: <?php echo ($position_y + 15) . '%'; ?>;"
              class="inet-webkit-call <?php echo esc_attr($position); ?> inet-webkit-call-middle">
             <div class="inet-webkit-call-container <?php echo esc_attr($position); ?>">
                 <div class="inet-webkit-call-header" style="background-color:<?php echo esc_attr($color); ?>">
