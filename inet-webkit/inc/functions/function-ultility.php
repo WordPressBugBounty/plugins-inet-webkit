@@ -24,33 +24,52 @@ function inet_wk_format_date($date)
     return $newDate;
 }
 
+// Register AJAX actions for both logged-in and non-logged-in users
 add_action('wp_ajax_inet_wk_send_mail', 'inet_wk_send_mail');
 add_action('wp_ajax_nopriv_inet_wk_send_mail', 'inet_wk_send_mail');
 
-/**
- * @return void
- */
-function inet_wk_send_mail()
-{
-    if (sanitize_text_field($_POST['email'])) {
-        $to = sanitize_text_field($_POST['email']);
-        $subject = 'iNET Webkit - Cấu hình SMTP thành công';
-        $headers = array('Content-Type: text/html; charset=UTF-8');
+function inet_wk_send_mail() {
+    // Verify the nonce for security
+    if (!check_ajax_referer('inet_wk_send_mail_nonce', '_wpnonce', false)) {
+        wp_send_json_error(array(
+            'message' => 'Invalid nonce. Unauthorized request.' // Error message for invalid nonce
+        ));
+    }
 
-        ob_start();
+    // Check if the user has the "manage_options" capability (usually for admins)
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error(['message' => 'You do not have permission to access this action.'], 403);
+        wp_die(); // Terminate the script
+    }
 
-        echo 'Xin chúc mừng bạn đã cấu hình máy chủ SMTP thành công.' . PHP_EOL;
-        echo 'iNET Webkit Team.' . PHP_EOL;
+    // Check if the email field is not empty
+    if (!empty($_POST['email'])) {
+        $to = sanitize_email($_POST['email']); // Sanitize the email input
+        $subject = 'iNET Webkit - SMTP Configuration Success'; // Email subject
+        $message = 'Your SMTP has been successfully configured.'; // Email message
+        $headers = array('Content-Type: text/html; charset=UTF-8'); // Email headers
 
-        $message = ob_get_contents();
-
-        ob_end_clean();
-
+        // Send the email using wp_mail()
         $mail = wp_mail($to, $subject, $message, $headers);
 
         if ($mail) {
-            echo 'success';
+            // Send success response if the email is sent
+            wp_send_json_success(array(
+                'message' => 'Email sent successfully.'
+            ));
+        } else {
+            // Send error response if the email fails to send
+            wp_send_json_error(array(
+                'message' => 'Failed to send email. Please try again.'
+            ));
         }
+    } else {
+        // Send error response if the email is missing
+        wp_send_json_error(array(
+            'message' => 'Email address is required.'
+        ));
     }
-    die();
+
+    // Stop further execution after handling the AJAX request
+    wp_die();
 }

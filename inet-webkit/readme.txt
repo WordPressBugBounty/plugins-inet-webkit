@@ -1,9 +1,9 @@
 === iNET Webkit ===
 Contributors: iNET
-Tags: functions, inet-webkit, custom functions, functions.php, code, tricks, easy, recommended, optimize, wp inet-webkit, wp all in one, wp helper
+Tags: inet webkit plugin, optimize, wp inet webkit, wp all in one, wp helper
 Requires at least: 5.5
-Tested up to: 6.5
-Stable tag: 1.1.9
+Tested up to: 6.6.2
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,7 +56,17 @@ Sử dụng phương thức cài đặt Plugin iNET Webkit từ Bảng điều k
 4. Kích hoạt Plugin từ menu Plugins.
 5. Thực hiện cấu hình Plugin.
 
-== 1.1.9 ==
+== 1.2.4 ==
+== 1.2.3 ==
+== 1.2.2 ==
+* Fix bugs
+* Upgrade SMTP email sending security
+
+== 1.2.1 ==
+* Fix bugs
+* Update size link, profile link, Optimize image resize,...
+
+== 1.2.0 ==
 * Fix bugs
 * Update size link, profile link, Optimize image resize,...
 

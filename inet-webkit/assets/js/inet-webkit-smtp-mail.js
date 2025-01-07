@@ -40,7 +40,8 @@ jQuery(document).ready(function ($) {
             url: smtp.url,
             data: {
                 'action': 'inet_wk_send_mail',
-                'email': email
+                'email': email,
+                '_wpnonce': smtp._wpnonce
             },
             beforeSend: function () {
                 result.append('<img class="loader-outter" src="' + smtp.icon + '">');
@@ -48,10 +49,10 @@ jQuery(document).ready(function ($) {
             },
             success: function (res) {
                 $(".loader-outter").remove();
-                if (res === 'success') {
+                if (res.success) {
                     result.html('<div class="csf-field csf-field-submessage"><div class="csf-submessage csf-submessage-success">Chúc mừng! Đã gửi mail thành công</div><div class="clear"></div></div>');
                 } else {
-                    result.html('<div class="csf-field csf-field-submessage"><div class="csf-submessage csf-submessage-danger">Lỗi: Kiểm tra lại cấu hình mail</div><div class="clear"></div></div>');
+                    result.html('<div class="csf-field csf-field-submessage"><div class="csf-submessage csf-submessage-danger">' + res.message + '</div><div class="clear"></div></div>');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

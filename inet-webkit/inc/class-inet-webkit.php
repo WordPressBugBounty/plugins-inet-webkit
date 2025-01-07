@@ -7,7 +7,7 @@
 
 class INET_WK_Plugin
 {
-    public $version = '1.1.9';
+    public $version = '1.2.4';
     protected static $_instance = null;
 
     public static function instance()

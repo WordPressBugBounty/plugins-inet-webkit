@@ -36,7 +36,8 @@ if (!empty($inet_wk_options['inet-webkit-opt-smtp']['inet-webkit-smtp-active']))
     {
         $data = array(
             'url' => admin_url('admin-ajax.php'),
-            'icon' => INET_WK_URL . 'assets/images/inet-webkit-loading.gif'
+            'icon' => INET_WK_URL . 'assets/images/inet-webkit-loading.gif',
+            '_wpnonce' => wp_create_nonce('inet_wk_send_mail_nonce')
         );
         wp_enqueue_script('inet-webkit-smtp', INET_WK_URL . 'assets/js/inet-webkit-smtp-mail.js', array('jquery'), '1.0.0', true);
         wp_localize_script('inet-webkit-smtp', 'smtp', $data);

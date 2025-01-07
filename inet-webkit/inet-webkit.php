@@ -3,7 +3,7 @@
  * Plugin Name: iNET Webkit
  * Plugin URI:  https://wordpress.org/plugins/inet-webkit-plugin/
  * Description: The best WordPress All-in-One plugin. Powered by iNET Software Co., Ltd.
- * Version:     1.1.9
+ * Version:     1.2.4
  * Author:      iNET
  * Author URI:  https://inet.vn/wordpress/inet-webkit-plugin?affSource=inetwebkit
  * Text Domain: inet-webkit
